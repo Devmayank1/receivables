@@ -1,0 +1,34 @@
+# Spring Boot configuration
+spring:
+  profiles:
+    active: LOCAL
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://183.83.219.159:5432/INKRETA_DB?currentSchema="INVOICE_DB"
+    #type: com.mchange.v2.c3p0.ComboPooledDataSource
+    max-total: '30'
+    username: postgres
+    password: Password1
+ 
+    
+# Logger configuration
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+  level:
+    org.springframework: info
+    org.hibernate: debug
+# Server configuration
+server:
+  port: 7001
+  servlet:
+    context-path: /receivables
+    
+eureka:
+  client:
+    enabled: false
+    
+    
+    
+ 
+    
