@@ -13,7 +13,7 @@
         <value>
             <![CDATA[
 				select Age_Bucket, sum(inv_value) inv_value from inv_summary
-				 where  inv_status ='Open' group by Age_Bucket
+				 where  inv_status ='OPEN' group by Age_Bucket
 				 order by 2 desc
 			]]>
         </value>
@@ -23,7 +23,7 @@
         <value>
             <![CDATA[
 				select (sum(case when over_due_status ='Y' then inv_value else 0 end) *100)/sum(inv_value)
-				inv_value from inv_summary where  inv_status ='Open';
+				inv_value from inv_summary where  inv_status ='OPEN';
 			]]>
         </value>
     </query>
@@ -31,17 +31,17 @@
         <key>findCustomerAnalysis</key>
         <value>
             <![CDATA[
-				select cust_short_name , 
-				sum(inv_value) total_Outstanding,
-				sum(case when over_due_status ='N' then inv_value else 0 end) Current_Outstanding,
-				sum(case when over_due_status ='Y' then inv_value else 0 end) Overdue,
+				select cust_short_name customerName, 
+				sum(inv_value) totalOutstanding,
+				sum(case when over_due_status ='N' then inv_value else 0 end) currentOutstanding,
+				sum(case when over_due_status ='Y' then inv_value else 0 end) overdue,
 				sum(case when Age_Bucket ='1-30' then inv_value else 0 end) "1-30",
 				sum(case when Age_Bucket ='31-60' then inv_value else 0 end) "31-60",
 				sum(case when Age_Bucket ='61-90' then inv_value else 0 end) "61-90",
 				sum(case when Age_Bucket ='91-120' then inv_value else 0 end) "91-120",
 				sum(case when Age_Bucket ='121-150' then inv_value else 0 end) "121-150",
 				sum(case when Age_Bucket ='>150' then inv_value else 0 end) ">150"
-				from inv_summary where inv_status ='Open'
+				from inv_summary where inv_status ='OPEN'
 				group by cust_short_name
 			]]>
         </value>
