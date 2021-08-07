@@ -38,7 +38,7 @@ public class ResponseMessage {
 	}
 
 	public Date getTimestamp() {
-		return timestamp;
+		return new Date(timestamp.getTime());
 	}
 
 	public boolean isHasError() {
@@ -58,7 +58,7 @@ public class ResponseMessage {
 	}
 
 	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+		this.timestamp = new Date(timestamp.getTime());
 	}
 
 }

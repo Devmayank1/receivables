@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.annotation.PostConstruct;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
@@ -30,6 +31,8 @@ public class QueryRepository {
         try {
             inputStream = QueryRepository.class.getClassLoader().getResourceAsStream("sql-queries.xml");
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
             DocumentBuilder documentBuilder = docFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(inputStream);
             document.getDocumentElement().normalize();
