@@ -1,5 +1,6 @@
 package com.inkreta.receivables.controller;
 
+import com.inkreta.receivables.response.ApiError;
 import com.inkreta.receivables.response.ResponseMessage;
 import com.inkreta.receivables.service.ReceivablesService;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.inkreta.receivables.constant.ReceivableConstants.*;
 
@@ -41,6 +43,9 @@ public class ReceivablesController {
     @GetMapping(value = {"/current/outstandings"})
     public ResponseEntity<ResponseMessage> currentOutStanding() {
         BigDecimal resultData = receivablesService.findCurrentOutstandings(CURRENT_OUTSTANDINGS);
+        if(Objects.isNull(resultData)){
+            return  ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(new ApiError("Result is null",null)));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resultData.longValue()));
     }
 
@@ -71,6 +76,9 @@ public class ReceivablesController {
     @GetMapping(value = {"/current/overdue"})
     public ResponseEntity<ResponseMessage> currentOverdue() {
         BigDecimal resultData = receivablesService.findCurrentOverdue(CURRENT_OVERDUE);
+        if(Objects.isNull(resultData)){
+           return  ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(new ApiError("Result is null",null)));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resultData.longValue()));
     }
 
