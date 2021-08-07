@@ -22,7 +22,7 @@
         <key>findCurrentOverdue</key>
         <value>
             <![CDATA[
-				select (sum(case when over_due_status ='Y' then inv_value else 0 end) *100)/sum(inv_value)
+				select COALESCE((sum(case when over_due_status ='Y' then inv_value else 0 end) *100)/sum(inv_value),0)
 				inv_value from inv_summary where  inv_status ='OPEN';
 			]]>
         </value>
