@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,7 @@ public class ReceivablesRepository {
 	private QueryRepository queryRepository;
 
 	@Autowired
+	@Qualifier("currentTemplate")
 	private NamedParameterJdbcTemplate namedJdbcTemplate;
 
 	public BigDecimal findCurrentData(String queryName) {

@@ -2,7 +2,7 @@
 spring:
   profiles:
     active: LOCAL
-  datasource:
+  currentDataSource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://183.83.219.159:5432/INKRETA_DB?currentSchema="INVOICE_DB"
     #type: com.mchange.v2.c3p0.ComboPooledDataSource
@@ -20,7 +20,7 @@ logging:
     org.hibernate: debug
 # Server configuration
 server:
-  port: 7001
+  port: 7002
   servlet:
     context-path: /receivables
     
