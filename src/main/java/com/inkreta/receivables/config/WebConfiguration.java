@@ -40,6 +40,8 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		.and().authorizeRequests()
+		.antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**","/**").permitAll()
 				.anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
