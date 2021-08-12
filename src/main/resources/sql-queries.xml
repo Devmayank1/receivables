@@ -32,7 +32,7 @@
         <value>
             <![CDATA[
 				select cust_short_name customerName, 
-				sum(inv_value) totalOutstanding,
+				sum(Amount_Due) totalOutstanding,
 				sum(case when over_due_status ='N' then inv_value else 0 end) currentOutstanding,
 				sum(case when over_due_status ='Y' then inv_value else 0 end) overdue,
 				sum(case when Age_Bucket ='1-30' then inv_value else 0 end) "1-30",
@@ -43,6 +43,62 @@
 				sum(case when Age_Bucket ='>150' then inv_value else 0 end) ">150"
 				from inv_summary where inv_status ='OPEN'
 				group by cust_short_name
+			]]>
+        </value>
+    </query>
+    <query>
+        <key>findClosedOverduePercent</key>
+        <value>
+            <![CDATA[
+				select (sum(case when over_due_status ='Y' then Amount_Due else 0 end) *100)/sum(Amount_Due) overDuePercent
+				from Closed_inv_summary 
+			]]>
+        </value>
+    </query>
+    <query>
+        <key>findClosedAvgArDays</key>
+        <value>
+            <![CDATA[
+				select sum(closed_age_days)/count(distinct invoice_number) avgArDays from Closed_inv_summary
+			]]>
+        </value>
+    </query>
+    <query>
+        <key>findClosedOntimePercent</key>
+        <value>
+            <![CDATA[
+				select count(case when ontime_flag ='Y' then invoice_number end)*100/count(distinct invoice_number) ontimePercent  from Closed_inv_summary
+			]]>
+        </value>
+    </query>
+    <query>
+        <key>findTopFiveCustomerBucketByCount</key>
+        <value>
+            <![CDATA[
+				select overdue_bucket ,
+				count(distinct case when over_due_status  ='Y' then invoice_number end) Overdue_Invoices
+				from inv_summary 
+				group by overdue_bucket order by 2 desc 
+				limit 5
+			]]>
+        </value>
+    </query>
+    <query>
+        <key>findTopFiveCustomerBucketByValue</key>
+        <value>
+            <![CDATA[
+				select overdue_bucket ,
+				sum(distinct case when over_due_status  ='Y' then amount_due end) Overdue_Invoices
+				from inv_summary 
+				group by overdue_bucket order by 2 desc
+			]]>
+        </value>
+    </query>
+    <query>
+        <key>findCustomerAgingBucketAnalysis</key>
+        <value>
+            <![CDATA[
+				Select age_bucket, sum(Amount_due)  from inv_summary group by age_bucket
 			]]>
         </value>
     </query>
