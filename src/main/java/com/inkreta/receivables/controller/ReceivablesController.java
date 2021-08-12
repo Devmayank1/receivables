@@ -61,6 +61,8 @@ public class ReceivablesController {
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resultData));
   }
   
+  @ApiOperation(value = "Provides the aggregated closed over due percent, payload not required!",  response = Long.class)
+  @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved closed over due percent"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/closed/overdue/percent"})
   public ResponseEntity<ResponseMessage> closedOverduePercent() {
     BigDecimal resultData = this.receivablesService.findCurrentOutstandings("findClosedOverduePercent");
@@ -68,7 +70,9 @@ public class ReceivablesController {
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(new ApiError("Result is null", null))); 
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(Long.valueOf(resultData.longValue())));
   }
-  
+
+  @ApiOperation(value = "Provides the aggregated closed average ardays, payload not required!", response = Long.class)
+  @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved closed average ardays value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/closed/average/ardays"})
   public ResponseEntity<ResponseMessage> getClosedAvgArDays() {
     BigDecimal resultData = this.receivablesService.findCurrentOutstandings("findClosedAvgArDays");
@@ -77,6 +81,8 @@ public class ReceivablesController {
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(Long.valueOf(resultData.longValue())));
   }
   
+  @ApiOperation(value = "Provide the aggregated ontime precent value, payload not required!", response = Long.class)
+  @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved ontime percent value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/closed/ontime/percent"})
   public ResponseEntity<ResponseMessage> getClosedOntimePercent() {
     BigDecimal resultData = this.receivablesService.findCurrentOutstandings("findClosedOntimePercent");
@@ -85,18 +91,24 @@ public class ReceivablesController {
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(Long.valueOf(resultData.longValue())));
   }
   
+  @ApiOperation(value = "Provide the customer's top five bucket by count , payload not required!", response = Long.class)
+  @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved top five bucket count values"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/customer/top-five/bucket-count"})
   public ResponseEntity<ResponseMessage> getTopFiveCustomerBucketByCount() {
     List<Map<String, Object>> resultData = this.receivablesService.findCustomerAnalysis("findTopFiveCustomerBucketByCount");
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resultData));
   }
   
+  @ApiOperation(value = "Provide the customer's top five bucket by value , payload not required!", response = Long.class)
+  @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved top five bucket value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/customer/top-five/bucket-value"})
   public ResponseEntity<ResponseMessage> getTopFiveCustomerBucketByValue() {
     List<Map<String, Object>> resultData = this.receivablesService.findCustomerAnalysis("findTopFiveCustomerBucketByValue");
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resultData));
   }
   
+  @ApiOperation(value = "Provide the age bucket analysis value, payload not required!" , response = Long.class)
+  @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved aging bucket analysis value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/age-bucket/analysis"})
   public ResponseEntity<ResponseMessage> getAgingBucketAnalysis() {
     List<Map<String, Object>> resultData = this.receivablesService.findCustomerAnalysis("findCustomerAgingBucketAnalysis");
