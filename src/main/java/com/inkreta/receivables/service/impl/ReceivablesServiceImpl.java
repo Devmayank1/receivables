@@ -18,22 +18,22 @@ public class ReceivablesServiceImpl implements ReceivablesService {
 	
 	@Override
 	public BigDecimal findCurrentOutstandings(String queryName) {
-		return receivablesRepository.findCurrentData( queryName );
+		return receivablesRepository.fetchNumber( queryName );
 	}
 
 	@Override
 	public List<Map<String, Object>> findCurrentAnalysis(String queryName) {
-		return receivablesRepository.findAnalysis( queryName );
+		return receivablesRepository.fetchTabularData( queryName );
 	}
 
 	@Override
 	public BigDecimal findCurrentOverdue(String queryName) {
-		return receivablesRepository.findCurrentData( queryName );
+		return receivablesRepository.fetchNumber( queryName );
 	}
 
 	@Override
 	public List<Map<String, Object>> findCustomerAnalysis(String queryName) {
-		return receivablesRepository.findAnalysis( queryName );
+		return receivablesRepository.fetchTabularData( queryName );
 	}
 	
 }

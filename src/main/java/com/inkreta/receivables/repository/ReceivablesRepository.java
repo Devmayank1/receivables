@@ -19,13 +19,13 @@ public class ReceivablesRepository {
 	@Qualifier("currentTemplate")
 	private NamedParameterJdbcTemplate namedJdbcTemplate;
 
-	public BigDecimal findCurrentData(String queryName) {
+	public BigDecimal fetchNumber(String queryName) {
 		final String kpiSql = queryRepository.findQuery(queryName);
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		return namedJdbcTemplate.queryForObject(kpiSql, params, BigDecimal.class);
 	}
 
-	public List<Map<String, Object>> findAnalysis(String queryName) {
+	public List<Map<String, Object>> fetchTabularData(String queryName) {
 	 final String kpiSql = queryRepository.findQuery(queryName);
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		return namedJdbcTemplate.queryForList(kpiSql, params);
