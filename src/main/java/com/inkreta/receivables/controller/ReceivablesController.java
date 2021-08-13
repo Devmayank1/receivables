@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inkreta.receivables.constant.ReceivableConstants;
 import com.inkreta.receivables.response.ApiError;
 import com.inkreta.receivables.response.ResponseMessage;
 import com.inkreta.receivables.service.ReceivablesService;
@@ -54,7 +55,7 @@ public class ReceivablesController {
 	String exceptionMsg = null;
 	List<Map<String, Object>> responseList=null;
 	try {
-		responseList = this.receivablesService.findCurrentAnalysis("findCurrentAnalysis");
+		responseList = this.receivablesService.findCurrentAnalysis(ReceivableConstants.AGE_BUCKET_INVOICE_VALUE);
 	} catch (Exception e) {
 		errorMessage = JSON_PROCESSING_FAILED;exceptionMsg = e.getMessage();
 	} 
@@ -70,7 +71,7 @@ public class ReceivablesController {
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved current overdue invoice value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/current/overdue"})
   public ResponseEntity<ResponseMessage> currentOverdue() {
-    BigDecimal resultData = this.receivablesService.findCurrentOverdue("findCurrentOverdue");
+    BigDecimal resultData = this.receivablesService.findCurrentOverdue(ReceivableConstants.CURRENT_OVERDUE);
     return nullCheckOnKPIResult(resultData);
   }
   
@@ -82,7 +83,7 @@ public class ReceivablesController {
 	String exceptionMsg = null;
 	List<Map<String, Object>> responseList=null;
 	try {
-		responseList = this.receivablesService.findCustomerAnalysis("findCustomerAnalysis");
+		responseList = this.receivablesService.findCustomerAnalysis(ReceivableConstants.CUSTOMER_WISE_INVOICE_VALUE);
 	} catch (Exception e) {
 		errorMessage = JSON_PROCESSING_FAILED;exceptionMsg = e.getMessage();
 	} 
@@ -93,7 +94,7 @@ public class ReceivablesController {
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved closed over due percent"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/closed/overdue/percent"})
   public ResponseEntity<ResponseMessage> closedOverduePercent() {
-    BigDecimal resultData = this.receivablesService.findCurrentOutstandings("findClosedOverduePercent");
+    BigDecimal resultData = this.receivablesService.findCurrentOutstandings(ReceivableConstants.CURRENT_OVERDUE_PERCENT);
     return nullCheckOnKPIResult(resultData);
   }
 
@@ -101,7 +102,7 @@ public class ReceivablesController {
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved closed average ardays value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/closed/average/ardays"})
   public ResponseEntity<ResponseMessage> getClosedAvgArDays() {
-    BigDecimal resultData = this.receivablesService.findCurrentOutstandings("findClosedAvgArDays");
+    BigDecimal resultData = this.receivablesService.findCurrentOutstandings(ReceivableConstants.CLOSED_AVG_AR_DAYS);
     return nullCheckOnKPIResult(resultData);
   }
   
@@ -109,7 +110,7 @@ public class ReceivablesController {
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved ontime percent value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/closed/ontime/percent"})
   public ResponseEntity<ResponseMessage> getClosedOntimePercent() {
-    BigDecimal resultData = this.receivablesService.findCurrentOutstandings("findClosedOntimePercent");
+    BigDecimal resultData = this.receivablesService.findCurrentOutstandings(ReceivableConstants.CLOSED_ONE_TIME_PERCENT);
     return nullCheckOnKPIResult(resultData);
   }
   
@@ -121,7 +122,7 @@ public class ReceivablesController {
 	String exceptionMsg = null;
 	List<Map<String, Object>> responseList=null;
 	try {
-		responseList = this.receivablesService.findCustomerAnalysis("findTopFiveCustomerBucketByCount");
+		responseList = this.receivablesService.findCustomerAnalysis(ReceivableConstants.TOP_FIVE_BUCKET_COUNT);
 	} catch (Exception e) {
 		errorMessage = JSON_PROCESSING_FAILED;exceptionMsg = e.getMessage();
 	} 
@@ -136,7 +137,7 @@ public class ReceivablesController {
 	String exceptionMsg = null;
 	List<Map<String, Object>> responseList=null;
 	try {
-		responseList = this.receivablesService.findCustomerAnalysis("findTopFiveCustomerBucketByValue");
+		responseList = this.receivablesService.findCustomerAnalysis(ReceivableConstants.TOP_FIVE_BUCKET_VALUE);
 	} catch (Exception e) {
 		errorMessage = JSON_PROCESSING_FAILED;exceptionMsg = e.getMessage();
 	} 
@@ -151,7 +152,7 @@ public class ReceivablesController {
 	String exceptionMsg = null;
 	List<Map<String, Object>> responseList=null;
 	try {
-		responseList = this.receivablesService.findCustomerAnalysis("findCustomerAgingBucketAnalysis");
+		responseList = this.receivablesService.findCustomerAnalysis(ReceivableConstants.CUSTOMER_AGING_BUCKET_ANALYSIS);
 	} catch (Exception e) {
 		errorMessage = JSON_PROCESSING_FAILED;exceptionMsg = e.getMessage();
 	} 
@@ -166,7 +167,7 @@ public class ReceivablesController {
 	String exceptionMsg = null;
 	List<Map<String, Object>> responseList=null;
 	try {
-		responseList = this.receivablesService.findCustomerAnalysis("findCustomerDataAnalysis");
+		responseList = this.receivablesService.findCustomerAnalysis(ReceivableConstants.CUSTOMER_DATA_ANALYSIS);
 	} catch (Exception e) {
 		errorMessage = JSON_PROCESSING_FAILED;exceptionMsg = e.getMessage();
 	} 
