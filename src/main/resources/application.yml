@@ -20,7 +20,7 @@ logging:
     org.hibernate: debug
 # Server configuration
 server:
-  port: 7002
+  port: 7001
   servlet:
     context-path: /receivables
     

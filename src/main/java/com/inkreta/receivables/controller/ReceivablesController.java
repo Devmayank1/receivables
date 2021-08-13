@@ -157,4 +157,19 @@ public class ReceivablesController {
 	} 
 	return nullCheckOnResponse(errorMessage, exceptionMsg, responseList);
   }
+  
+  @ApiOperation(value = "Provide the customer data analysis to generate scatter chart, payload not required!" , response = Long.class)
+  @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved customer analysis data"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
+  @GetMapping({"/customer/data/analysis"})
+  public ResponseEntity<ResponseMessage> getCustomerData() {
+    String errorMessage = null;
+	String exceptionMsg = null;
+	List<Map<String, Object>> responseList=null;
+	try {
+		responseList = this.receivablesService.findCustomerAnalysis("findCustomerDataAnalysis");
+	} catch (Exception e) {
+		errorMessage = JSON_PROCESSING_FAILED;exceptionMsg = e.getMessage();
+	} 
+	return nullCheckOnResponse(errorMessage, exceptionMsg, responseList);
+  }
 }

@@ -102,4 +102,17 @@
 			]]>
         </value>
     </query>
+    <query>
+        <key>findCustomerDataAnalysis</key>
+        <value>
+            <![CDATA[
+				select cust_short_name custShortName , 
+				count(distinct invoice_number) Open_Invoices,
+				count(case when over_due_status ='Y' then invoice_number end) overdue_Invoices,
+				sum(case when over_due_status ='Y' then Amount_Due else 0 end) Amount_overdue
+				from inv_summary 
+				group by cust_short_name
+			]]>
+        </value>
+    </query>
 </queries>
