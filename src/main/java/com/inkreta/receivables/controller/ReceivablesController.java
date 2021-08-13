@@ -1,10 +1,12 @@
 package com.inkreta.receivables.controller;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
+import com.inkreta.receivables.constant.ReceivableConstants;
+import com.inkreta.receivables.response.ApiError;
+import com.inkreta.receivables.response.ResponseMessage;
+import com.inkreta.receivables.service.ReceivablesService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inkreta.receivables.constant.ReceivableConstants;
-import com.inkreta.receivables.response.ApiError;
-import com.inkreta.receivables.response.ResponseMessage;
-import com.inkreta.receivables.service.ReceivablesService;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import static com.inkreta.receivables.constant.ReceivableConstants.*;
 
-import static com.inkreta.receivables.constant.ReceivableConstants.JSON_PROCESSING_FAILED;
-import static com.inkreta.receivables.constant.ReceivableConstants.RESULT_IS_NULL;;
+;
 
 @CrossOrigin
 @RestController
@@ -36,7 +35,7 @@ public class ReceivablesController {
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved current outstanding value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/current/outstandings"})
   public ResponseEntity<ResponseMessage> currentOutStanding() {
-    BigDecimal resultData = this.receivablesService.findCurrentOutstandings("findCurrentOutstandings");
+    BigDecimal resultData = this.receivablesService.findCurrentOutstandings(CURRENT_OUTSTANDINGS);
     return nullCheckOnKPIResult(resultData);
   }
   private ResponseEntity<ResponseMessage> nullCheckOnKPIResult(BigDecimal kpiData) {
