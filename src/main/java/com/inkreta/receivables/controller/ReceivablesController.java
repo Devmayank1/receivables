@@ -74,7 +74,7 @@ public class ReceivablesController {
     return nullCheckOnKPIResult(resultData);
   }
   
-  @ApiOperation(value = "Provide the customer-wise aggregated invoice value, payload not required!", notes = "Aggregated invoice value based on age bucket and over due status flag for open invoices", response = Long.class)
+  @ApiOperation(value = "Provide the customer-wise aggregated invoice value, payload not required!", notes = "Aggregated invoice value based on age bucket and over due status flag for open invoices",  response = List.class , responseContainer = " List<Map<String, Object>>")
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved customer-wise invoice value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/customer/invoice-value/analysis"})
   public ResponseEntity<ResponseMessage> customerWiseInvoiceValue() {
@@ -113,7 +113,7 @@ public class ReceivablesController {
     return nullCheckOnKPIResult(resultData);
   }
   
-  @ApiOperation(value = "Provide the customer's top five bucket by count , payload not required!", response = Long.class)
+  @ApiOperation(value = "Provide the customer's top five bucket by count , payload not required!",  response = List.class , responseContainer = " List<Map<String, Object>>")
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved top five bucket count values"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/customer/top-five/bucket-count"})
   public ResponseEntity<ResponseMessage> getTopFiveCustomerBucketByCount() {
@@ -128,7 +128,7 @@ public class ReceivablesController {
 	return nullCheckOnResponse(errorMessage, exceptionMsg, responseList);
   }
   
-  @ApiOperation(value = "Provide the customer's top five bucket by value , payload not required!", response = Long.class)
+  @ApiOperation(value = "Provide the customer's top five bucket by value , payload not required!",  response = List.class , responseContainer = " List<Map<String, Object>>")
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved top five bucket value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/customer/top-five/bucket-value"})
   public ResponseEntity<ResponseMessage> getTopFiveCustomerBucketByValue() {
@@ -143,7 +143,7 @@ public class ReceivablesController {
 	return nullCheckOnResponse(errorMessage, exceptionMsg, responseList);
   }
   
-  @ApiOperation(value = "Provide the age bucket analysis value, payload not required!" , response = Long.class)
+  @ApiOperation(value = "Provide the age bucket analysis value, payload not required!" ,  response = List.class , responseContainer = " List<Map<String, Object>>")
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved aging bucket analysis value"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/age-bucket/analysis"})
   public ResponseEntity<ResponseMessage> getAgingBucketAnalysis() {
@@ -158,7 +158,7 @@ public class ReceivablesController {
 	return nullCheckOnResponse(errorMessage, exceptionMsg, responseList);
   }
   
-  @ApiOperation(value = "Provide the customer data analysis to generate scatter chart, payload not required!" , response = Long.class)
+  @ApiOperation(value = "Provide the customer data analysis to generate scatter chart, payload not required!" ,  response = List.class , responseContainer = " List<Map<String, Object>>")
   @ApiResponses({@ApiResponse(code = 200, message = "Successfully retrieved customer analysis data"), @ApiResponse(code = 401, message = "You are not authorized to view the resource"), @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"), @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
   @GetMapping({"/customer/data/analysis"})
   public ResponseEntity<ResponseMessage> getCustomerData() {

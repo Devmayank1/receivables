@@ -4,7 +4,7 @@
         <key>findCurrentOutstandings</key>
         <value>
             <![CDATA[
-				select sum(amount_due) "Current Outstanding" from inv_summary where over_due_status ='N'
+				select sum(amount_due) "currentOutstanding" from inv_summary where over_due_status ='N'
 			]]>
         </value>
     </query>
@@ -12,9 +12,7 @@
         <key>findCurrentAnalysis</key>
         <value>
             <![CDATA[
-				select Age_Bucket, sum(inv_value) inv_value from inv_summary
-				 group by Age_Bucket
-				 order by 2 desc
+				select Age_Bucket, sum(inv_value) inv_value from inv_summary group by Age_Bucket order by 2 desc
 			]]>
         </value>
     </query>
@@ -41,7 +39,7 @@
 				sum(case when Age_Bucket ='91-120' then inv_value else 0 end) "91-120",
 				sum(case when Age_Bucket ='121-150' then inv_value else 0 end) "121-150",
 				sum(case when Age_Bucket ='>150' then inv_value else 0 end) ">150"
-				from inv_summary where inv_status ='OPEN'
+				from inv_summary 
 				group by cust_short_name
 			]]>
         </value>
@@ -51,7 +49,7 @@
         <value>
             <![CDATA[
 				select (sum(case when over_due_status ='Y' then Amount_Due else 0 end) *100)/sum(Amount_Due) overDuePercent
-				from Closed_inv_summary 
+				from inv_summary 
 			]]>
         </value>
     </query>
@@ -59,7 +57,7 @@
         <key>findClosedAvgArDays</key>
         <value>
             <![CDATA[
-				select sum(closed_age_days)/count(distinct invoice_number) avgArDays from Closed_inv_summary
+				select sum(ar_days)/count(distinct invoice_number) avgArDays from Closed_inv_summary
 			]]>
         </value>
     </query>
@@ -106,10 +104,10 @@
         <key>findCustomerDataAnalysis</key>
         <value>
             <![CDATA[
-				select cust_short_name custShortName , 
-				count(distinct invoice_number) Open_Invoices,
-				count(case when over_due_status ='Y' then invoice_number end) overdue_Invoices,
-				sum(case when over_due_status ='Y' then Amount_Due else 0 end) Amount_overdue
+				select cust_short_name customerName , 
+				count(distinct invoice_number) OpenInvoices,
+				count(case when over_due_status ='Y' then invoice_number end) overdueInvoices,
+				sum(case when over_due_status ='Y' then Amount_Due else 0 end) amountOverdue
 				from inv_summary 
 				group by cust_short_name
 			]]>
