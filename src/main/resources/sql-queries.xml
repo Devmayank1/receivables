@@ -4,7 +4,7 @@
         <key>findCurrentOutstandings</key>
         <value>
             <![CDATA[
-				select sum(inv_value) "Current Outstanding" from inv_summary where over_due_status  ='N'
+				select sum(amount_due) "Current Outstanding" from inv_summary where over_due_status ='N'
 			]]>
         </value>
     </query>
@@ -13,7 +13,7 @@
         <value>
             <![CDATA[
 				select Age_Bucket, sum(inv_value) inv_value from inv_summary
-				 where  inv_status ='OPEN' group by Age_Bucket
+				 group by Age_Bucket
 				 order by 2 desc
 			]]>
         </value>

@@ -17,14 +17,24 @@ public class ReceivablesApplication extends SpringBootServletInitializer{
         return builder.sources(ReceivablesApplication.class);
     }
 	
-	/*
-	 * @Bean public JwtRequestFilter setJwtRequestFilter() { return new
-	 * JwtRequestFilter(); }
-	 * 
-	 * @Bean public JwtAuthenticationEntryPoint setJwtAuthenticationEntryPoint() {
-	 * return new JwtAuthenticationEntryPoint(); }
-	 * 
-	 * @Bean public JwtTokenUtil setJwtTokenUtil() { return new JwtTokenUtil(); }
-	 */
+/*
+	@Bean
+	public JwtRequestFilter setJwtRequestFilter()
+	{
+		return new JwtRequestFilter();
+	}
+	
+	@Bean
+	public JwtAuthenticationEntryPoint setJwtAuthenticationEntryPoint()
+	{
+		return new JwtAuthenticationEntryPoint();
+	}
+	
+	@Bean
+	public JwtTokenUtil setJwtTokenUtil()
+	{
+		return new JwtTokenUtil();
+	}
+*/
 
 }
