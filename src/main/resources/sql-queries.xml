@@ -89,8 +89,9 @@
 				CASE WHEN 
 				sum(distinct case when over_due_status  ='Y' then amount_due end)  
 				IS NULL THEN 0 ELSE sum(distinct case when over_due_status  ='Y' then amount_due end)   END Overdue_Invoices
-				from "INVOICE_DB".inv_summary 
-				group by overdue_bucket order by 2 desc
+				from inv_summary 
+				group by overdue_bucket 
+				order  BY NULLIF(regexp_replace(overdue_bucket, '\D', '', 'g'), '')  asc NULLS FIRST
 			]]>
         </value>
     </query>
