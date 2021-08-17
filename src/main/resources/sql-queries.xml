@@ -12,7 +12,7 @@
         <key>findCurrentAnalysis</key>
         <value>
             <![CDATA[
-				select Age_Bucket, sum(inv_value) inv_value from inv_summary group by Age_Bucket order by 2 desc
+				select Age_Bucket, sum(inv_value) inv_value from inv_summary group by Age_Bucket ORDER BY 1  asc NULLS last
 			]]>
         </value>
     </query>
@@ -37,8 +37,7 @@
 				sum(case when Age_Bucket ='31-60' then inv_value else 0 end) "31-60",
 				sum(case when Age_Bucket ='61-90' then inv_value else 0 end) "61-90",
 				sum(case when Age_Bucket ='91-120' then inv_value else 0 end) "91-120",
-				sum(case when Age_Bucket ='121-150' then inv_value else 0 end) "121-150",
-				sum(case when Age_Bucket ='>150' then inv_value else 0 end) ">150"
+				sum(case when Age_Bucket ='>120' then inv_value else 0 end) ">120"
 				from inv_summary 
 				group by cust_short_name
 			]]>
@@ -76,7 +75,7 @@
 				select overdue_bucket ,
 				count(distinct case when over_due_status  ='Y' then invoice_number end) Overdue_Invoices
 				from inv_summary 
-				group by overdue_bucket order by 2 desc 
+				group by overdue_bucket ORDER BY 1  asc NULLS last
 				limit 5
 			]]>
         </value>
@@ -91,7 +90,7 @@
 				IS NULL THEN 0 ELSE sum(distinct case when over_due_status  ='Y' then amount_due end)   END Overdue_Invoices
 				from inv_summary 
 				group by overdue_bucket 
-				order  BY NULLIF(regexp_replace(overdue_bucket, '\D', '', 'g'), '')  asc NULLS FIRST
+				ORDER BY 1  asc NULLS last
 			]]>
         </value>
     </query>
@@ -99,7 +98,7 @@
         <key>findCustomerAgingBucketAnalysis</key>
         <value>
             <![CDATA[
-				Select age_bucket, sum(Amount_due)  from inv_summary group by age_bucket order by 2 desc
+				Select age_bucket, sum(Amount_due)  from inv_summary group by age_bucket ORDER BY 1  asc NULLS last
 			]]>
         </value>
     </query>
