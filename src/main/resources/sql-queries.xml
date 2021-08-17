@@ -37,8 +37,8 @@
 				sum(case when Age_Bucket ='31-60' then inv_value else 0 end) "31-60",
 				sum(case when Age_Bucket ='61-90' then inv_value else 0 end) "61-90",
 				sum(case when Age_Bucket ='91-120' then inv_value else 0 end) "91-120",
-				--sum(case when Age_Bucket ='121-150' then inv_value else 0 end) "121-150",
-				sum(case when Age_Bucket ='>120' then inv_value else 0 end) ">120"
+				sum(case when Age_Bucket ='121-150' then inv_value else 0 end) "121-150",
+				sum(case when Age_Bucket ='>150' then inv_value else 0 end) ">150"
 				from inv_summary 
 				group by cust_short_name
 			]]>
@@ -99,7 +99,7 @@
         <key>findCustomerAgingBucketAnalysis</key>
         <value>
             <![CDATA[
-				Select age_bucket, sum(Amount_due)  from inv_summary group by age_bucket
+				Select age_bucket, sum(Amount_due)  from inv_summary group by age_bucket order by 2 desc
 			]]>
         </value>
     </query>
